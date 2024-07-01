@@ -127,6 +127,14 @@ Build
 cmake --build . --config Debug
 ```
 
+Make sure to get the dotnet build in the `managed` folder and add the output to the new `api` folder in `build/addons/counterstrikesharp`
+
+```bash
+dotnet build
+```
+
+
+
 License
 -------
 CounterStrikeSharp is licensed under the GNU General Public License version 3. A special exemption is outlined regarding published plugins, which you can find in the [LICENSE](LICENSE) file.
