@@ -1,6 +1,8 @@
 
-namespace CounterStrikeSharp.API.Core;
+using CounterStrikeSharp.API.Modules.Memory;
 using CounterStrikeSharp.API.Core.Attributes;
+
+namespace CounterStrikeSharp.API.Core;
 
 public partial class CUsercmd : NativeObject
 {
