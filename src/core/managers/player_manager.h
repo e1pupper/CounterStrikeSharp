@@ -143,15 +143,15 @@ class PlayerManager : public GlobalClass
     PlayerManager();
     void OnStartup() override;
     void OnAllInitialized() override;
-    bool OnClientConnect(CPlayerSlot slot, const char* pszName, uint64 xuid,
-                         const char* pszNetworkID, bool unk1, CBufferString* pRejectReason);
-    bool OnClientConnect_Post(CPlayerSlot slot, const char* pszName, uint64 xuid,
-                              const char* pszNetworkID, bool unk1, CBufferString* pRejectReason);
+    bool
+    OnClientConnect(CPlayerSlot slot, const char* pszName, uint64 xuid, const char* pszNetworkID, bool unk1, CBufferString* pRejectReason);
+    bool OnClientConnect_Post(
+        CPlayerSlot slot, const char* pszName, uint64 xuid, const char* pszNetworkID, bool unk1, CBufferString* pRejectReason);
     void OnClientPutInServer(CPlayerSlot slot, char const* pszName, int type, uint64 xuid);
-    void OnClientDisconnect(CPlayerSlot slot, ENetworkDisconnectionReason reason,
-                            const char* pszName, uint64 xuid, const char* pszNetworkID);
-    void OnClientDisconnect_Post(CPlayerSlot slot, ENetworkDisconnectionReason reason,
-                                 const char* pszName, uint64 xuid, const char* pszNetworkID) const;
+    void
+    OnClientDisconnect(CPlayerSlot slot, ENetworkDisconnectionReason reason, const char* pszName, uint64 xuid, const char* pszNetworkID);
+    void OnClientDisconnect_Post(
+        CPlayerSlot slot, ENetworkDisconnectionReason reason, const char* pszName, uint64 xuid, const char* pszNetworkID) const;
     void OnClientVoice(CPlayerSlot slot) const;
     void OnAuthorized(CPlayer* player) const;
     void OnServerActivate(edict_t* pEdictList, int edictCount, int clientMax) const;
@@ -161,6 +161,7 @@ class PlayerManager : public GlobalClass
     void OnClientCommand(CPlayerSlot slot, const CCommand& args) const;
     int ListenClient() const;
     void RunAuthChecks();
+    void ProcessUsercmds(CUserCmd* cmds, int numcmds, int totalcmds, int dropped_packets, bool paused);
 
   public:
     int NumPlayers() const;
@@ -186,6 +187,7 @@ class PlayerManager : public GlobalClass
     ScriptCallback* m_on_client_disconnect_post_callback;
     ScriptCallback* m_on_client_voice_callback;
     ScriptCallback* m_on_client_authorized_callback;
+    ScriptCallback* m_on_client_process_usercmds_callback;
 };
 
 } // namespace counterstrikesharp
