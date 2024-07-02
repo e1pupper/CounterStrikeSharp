@@ -483,7 +483,7 @@ void PlayerManager::OnAuthorized(CPlayer* player) const
     m_on_client_authorized_callback->Execute();
 }
 
-void PlayerManager::ProcessUsercmds(CUserCmd* cmds, int numcmds, int totalcmds, int dropped_packets, bool paused)
+void PlayerManager::ProcessUsercmds(edict_t* cmds, int numcmds, int totalcmds, int dropped_packets, bool paused)
 {
     CSSHARP_CORE_TRACE("[PlayerManager][ProcessUsercmds] - {}, {}, {}, {}, {}", cmds, numcmds, totalcmds, dropped_packets, paused);
 
