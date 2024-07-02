@@ -72,7 +72,7 @@ void PlayerManager::OnAllInitialized()
                 true);
     SH_ADD_HOOK(IServerGameClients, ClientCommand, globals::serverGameClients, SH_MEMBER(this, &PlayerManager::OnClientCommand), false);
     SH_ADD_HOOK(IServerGameClients, ClientVoice, globals::serverGameClients, SH_MEMBER(this, &PlayerManager::OnClientVoice), true);
-    SH_ADD_HOOK(IServerGameClients, ProcessUsercmds, globals::serverGameClients, SH_MEMBER(this, &PlayerManager::ProcessUsercmds), false);
+    SH_ADD_HOOK(IServerGameClients, ProcessUsercmds, globals::serverGameClients, SH_MEMBER(this, &PlayerManager::OnProcessUsercmds), false);
 
     m_on_client_connect_callback = globals::callbackManager.CreateCallback("OnClientConnect");
     m_on_client_connected_callback = globals::callbackManager.CreateCallback("OnClientConnected");
@@ -81,7 +81,7 @@ void PlayerManager::OnAllInitialized()
     m_on_client_disconnect_post_callback = globals::callbackManager.CreateCallback("OnClientDisconnectPost");
     m_on_client_voice_callback = globals::callbackManager.CreateCallback("OnClientVoice");
     m_on_client_authorized_callback = globals::callbackManager.CreateCallback("OnClientAuthorized");
-    m_on_client_process_usercmds_callback = globals::callbackManager.CreateCallback("ProcessUsercmds");
+    m_on_client_process_usercmds_callback = globals::callbackManager.CreateCallback("OnProcessUsercmds");
 }
 
 void PlayerManager::OnShutdown()
@@ -97,7 +97,7 @@ void PlayerManager::OnShutdown()
                    SH_MEMBER(this, &PlayerManager::OnClientDisconnect_Post), true);
     SH_REMOVE_HOOK(IServerGameClients, ClientCommand, globals::serverGameClients, SH_MEMBER(this, &PlayerManager::OnClientCommand), false);
     SH_REMOVE_HOOK(IServerGameClients, ClientVoice, globals::serverGameClients, SH_MEMBER(this, &PlayerManager::OnClientVoice), true);
-    SH_REMOVE_HOOK(IServerGameClients, ProcessUsercmds, globals::serverGameClients, SH_MEMBER(this, &PlayerManager::ProcessUsercmds),
+    SH_REMOVE_HOOK(IServerGameClients, ProcessUsercmds, globals::serverGameClients, SH_MEMBER(this, &PlayerManager::OnProcessUsercmds),
                    false);
 
     globals::callbackManager.ReleaseCallback(m_on_client_connect_callback);
@@ -483,9 +483,9 @@ void PlayerManager::OnAuthorized(CPlayer* player) const
     m_on_client_authorized_callback->Execute();
 }
 
-void PlayerManager::ProcessUsercmds(edict_t* cmds, int numcmds, int totalcmds, int dropped_packets, bool paused)
+void PlayerManager::OnProcessUsercmds(edict_t* cmds, int numcmds, int totalcmds, int dropped_packets, bool paused)
 {
-    CSSHARP_CORE_TRACE("[PlayerManager][ProcessUsercmds] - {}, {}, {}, {}, {}", cmds, numcmds, totalcmds, dropped_packets, paused);
+    CSSHARP_CORE_TRACE("[PlayerManager][OnProcessUsercmds] - {}, {}, {}, {}, {}", cmds, numcmds, totalcmds, dropped_packets, paused);
 
     m_on_client_process_usercmds_callback->ScriptContext().Reset();
     m_on_client_process_usercmds_callback->ScriptContext().Push(cmds);

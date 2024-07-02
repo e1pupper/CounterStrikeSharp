@@ -161,7 +161,7 @@ class PlayerManager : public GlobalClass
     void OnClientCommand(CPlayerSlot slot, const CCommand& args) const;
     int ListenClient() const;
     void RunAuthChecks();
-    void ProcessUsercmds(edict_t* cmds, int numcmds, int totalcmds, int dropped_packets, bool paused);
+    void OnProcessUsercmds(edict_t* cmds, int numcmds, int totalcmds, int dropped_packets, bool paused);
 
   public:
     int NumPlayers() const;
