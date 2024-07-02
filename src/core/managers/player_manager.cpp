@@ -484,7 +484,7 @@ void PlayerManager::OnAuthorized(CPlayer* player) const
     m_on_client_authorized_callback->Execute();
 }
 
-void PlayerManager::OnProcessUsercmds(CPlayerSlot slot, bf_read* buf, int numcmds, bool ignore, bool paused, float margin)
+int PlayerManager::OnProcessUsercmds(CPlayerSlot slot, bf_read* buf, int numcmds, bool ignore, bool paused, float margin)
 {
     CSSHARP_CORE_TRACE("[PlayerManager][OnProcessUsercmds] - {}, {}, {}, {}, {}", slot.Get(), buf, numcmds, ignore, paused, margin);
 
@@ -496,6 +496,8 @@ void PlayerManager::OnProcessUsercmds(CPlayerSlot slot, bf_read* buf, int numcmd
     m_on_client_process_usercmds_callback->ScriptContext().Push(paused);
     m_on_client_process_usercmds_callback->ScriptContext().Push(margin);
     m_on_client_process_usercmds_callback->Execute();
+
+    return 0;
 }
 
 bool CPlayer::WasCountedAsInGame() const { return m_is_in_game; }

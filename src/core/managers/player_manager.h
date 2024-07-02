@@ -161,7 +161,7 @@ class PlayerManager : public GlobalClass
     void OnClientCommand(CPlayerSlot slot, const CCommand& args) const;
     int ListenClient() const;
     void RunAuthChecks();
-    void OnProcessUsercmds(CPlayerSlot slot, bf_read* buf, int numcmds, bool ignore, bool paused, float margin);
+    int OnProcessUsercmds(CPlayerSlot slot, bf_read* buf, int numcmds, bool ignore, bool paused, float margin);
 
   public:
     int NumPlayers() const;
