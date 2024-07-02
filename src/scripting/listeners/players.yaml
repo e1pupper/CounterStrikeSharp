@@ -4,4 +4,4 @@ OnClientPutInServer: playerSlot:int
 OnClientDisconnect: playerSlot:int
 OnClientDisconnectPost: playerSlot:int
 OnClientAuthorized: playerSlot:int, steamId:SteamID
-OnProcessUsercmds: cmds:IntPtr, numcmds:int, totalcmds:int, dropped_packets:int, paused:bool
+OnProcessUsercmds: playerSlot:int, buf:IntPtr, numcmds:int, ignore:bool, paused:bool, margin:float

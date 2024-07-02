@@ -484,16 +484,17 @@ void PlayerManager::OnAuthorized(CPlayer* player) const
     m_on_client_authorized_callback->Execute();
 }
 
-void PlayerManager::OnProcessUsercmds(edict_t* cmds, int numcmds, int totalcmds, int dropped_packets, bool paused)
+void PlayerManager::OnProcessUsercmds(CPlayerSlot slot, bf_read* buf, int numcmds, bool ignore, bool paused, float margin)
 {
-    CSSHARP_CORE_TRACE("[PlayerManager][OnProcessUsercmds] - {}, {}, {}, {}, {}", cmds, numcmds, totalcmds, dropped_packets, paused);
+    CSSHARP_CORE_TRACE("[PlayerManager][OnProcessUsercmds] - {}, {}, {}, {}, {}", slot.Get(), buf, numcmds, ignore, paused, margin);
 
     m_on_client_process_usercmds_callback->ScriptContext().Reset();
-    m_on_client_process_usercmds_callback->ScriptContext().Push(cmds);
-    m_on_client_process_usercmds_callback->ScriptContext().Push(numcmds);
-    m_on_client_process_usercmds_callback->ScriptContext().Push(totalcmds);
-    m_on_client_process_usercmds_callback->ScriptContext().Push(dropped_packets);
-    m_on_client_process_usercmds_callback->ScriptContext().Push(paused);
+    m_on_client_process_usercmds_callback->Push(slot.Get());
+    m_on_client_process_usercmds_callback->Push(buf);
+    m_on_client_process_usercmds_callback->Push(numcmds);
+    m_on_client_process_usercmds_callback->Push(ignore);
+    m_on_client_process_usercmds_callback->Push(paused);
+    m_on_client_process_usercmds_callback->Push(margin);
     m_on_client_process_usercmds_callback->Execute();
 }
 
