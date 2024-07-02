@@ -489,12 +489,12 @@ void PlayerManager::OnProcessUsercmds(CPlayerSlot slot, bf_read* buf, int numcmd
     CSSHARP_CORE_TRACE("[PlayerManager][OnProcessUsercmds] - {}, {}, {}, {}, {}", slot.Get(), buf, numcmds, ignore, paused, margin);
 
     m_on_client_process_usercmds_callback->ScriptContext().Reset();
-    m_on_client_process_usercmds_callback->Push(slot.Get());
-    m_on_client_process_usercmds_callback->Push(buf);
-    m_on_client_process_usercmds_callback->Push(numcmds);
-    m_on_client_process_usercmds_callback->Push(ignore);
-    m_on_client_process_usercmds_callback->Push(paused);
-    m_on_client_process_usercmds_callback->Push(margin);
+    m_on_client_process_usercmds_callback->ScriptContext().Push(slot.Get());
+    m_on_client_process_usercmds_callback->ScriptContext().Push(buf);
+    m_on_client_process_usercmds_callback->ScriptContext().Push(numcmds);
+    m_on_client_process_usercmds_callback->ScriptContext().Push(ignore);
+    m_on_client_process_usercmds_callback->ScriptContext().Push(paused);
+    m_on_client_process_usercmds_callback->ScriptContext().Push(margin);
     m_on_client_process_usercmds_callback->Execute();
 }
 
