@@ -55,7 +55,7 @@ SH_DECL_HOOK6_void(IServerGameClients, OnClientConnected, SH_NOATTRIB, 0, CPlaye
 SH_DECL_HOOK6(IServerGameClients, ClientConnect, SH_NOATTRIB, 0, bool, CPlayerSlot, const char*, uint64, const char*, bool, CBufferString*);
 
 SH_DECL_HOOK2_void(IServerGameClients, ClientCommand, SH_NOATTRIB, 0, CPlayerSlot, const CCommand&);
-SH_DECL_HOOK5_void(IServerGameClients, ProcessUsercmds, SH_NOATTRIB, 0, edict_t*, int, int, int, bool);
+SH_DECL_HOOK5_void(IServerGameClients, ProcessUsercmds, SH_NOATTRIB, 0, CPlayerSlot, bf_read*, int, bool, bool, float);
 
 namespace counterstrikesharp {
 
